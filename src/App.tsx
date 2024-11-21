@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import './App.css'
 import { GetTimeEntryUseCase } from './core/useCases/GetTimeEntryUseCase';
+import { RegisterPage } from './app/pages/RegisterPage';
 
 function App() {
 
@@ -11,7 +12,7 @@ function App() {
 
   return (
     <>
-      
+      <RegisterPage />
     </>
   )
 }
