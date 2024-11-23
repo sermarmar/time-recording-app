@@ -1,5 +1,5 @@
-import { TimeEntryDto } from '../dtos/TimeEntryDto';
-import { TimeEntry } from "../model/TimeEntry";
+import { TimeEntryDto } from '../../dtos/TimeEntryDto';
+import { TimeEntry } from "../../model/TimeEntry";
 
 export const TimeEntryDtoFactory = {
     create(model: TimeEntry): TimeEntryDto {

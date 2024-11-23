@@ -2,6 +2,7 @@ import styled from "@emotion/styled"
 import { Button } from "../components/Button"
 import { Input } from "../components/Input"
 import { ChangeEvent, FormEvent, useState } from "react"
+import { SaveUserUseCase } from "../../core/useCases/SaveUserUseCase"
 
 interface FormState {
     name: string
@@ -36,6 +37,20 @@ export const RegisterForm: React.FC = () => {
 
     const handleRegister = (formEvent: FormEvent<HTMLFormElement>) => {
         formEvent.preventDefault();
+        SaveUserUseCase.save(formData).then(data => {
+            console.log(data);
+            alert('Se ha registrado correctamente');
+            setFormData({
+                name: '',
+                surname: '',
+                email: '',
+                password: '',
+                passwordRepeat: ''
+            });
+        }).catch(error => {
+            console.log(error);
+            alert('No se ha registrado correctamente. Vuelve a intentarlo');
+        });
         /*if(formData.password !== formData.passwordRepeat) {
             setValidation(prevData => (prevData.passwordRepeat.error = true));
         } else {
