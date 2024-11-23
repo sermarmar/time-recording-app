@@ -21,6 +21,20 @@ export const UserApi = {
         }
 
         return response;
+    },
+    login: async(email: string, pass: string) => {
+        const { data, error } = await supabase
+        .auth.signUp({
+            email: email,
+            password: pass
+        });
+        if(error !== null) {
+            throw error;
+        } else if(data.user === null) {
+            throw new Error;
+        }
+
+        return data.user;
     }
 
 }
