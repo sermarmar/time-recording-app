@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import './App.css'
 import { GetTimeEntryUseCase } from './core/useCases/GetTimeEntryUseCase';
-import { RegisterPage } from './app/pages/RegisterPage';
+import { RouterProvider } from './app/routes/RouteProvider';
 
 function App() {
 
@@ -12,7 +12,7 @@ function App() {
 
   return (
     <>
-      <RegisterPage />
+      <RouterProvider />
     </>
   )
 }
