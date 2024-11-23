@@ -1,4 +1,5 @@
 import styled from "@emotion/styled"
+import { ChangeEventHandler } from "react"
 
 interface InputProps {
     name: string
@@ -6,15 +7,19 @@ interface InputProps {
     text: string
     value?: string
     placeholder?: string
+    onChange?: ChangeEventHandler
+    onBlur?: ChangeEventHandler
+    messageError?: string
 }
 
-export const Input: React.FC<InputProps> = ({ name, type, text, value, placeholder }) => {
+export const Input: React.FC<InputProps> = ({ name, type, text, value, placeholder, onChange, onBlur, messageError }) => {
 
     return(
         <>
             <InputBox>
                 <label htmlFor={ name }>{ text } </label>
-                <Field type={ type } name={ name } value={ value } placeholder={ placeholder }/>
+                <Field type={ type } name={ name } value={ value } placeholder={ placeholder } onChange={ onChange } onBlur={ onBlur }/>
+                <MessageError>{ messageError }</MessageError>
             </InputBox>
         </>
     )
@@ -33,4 +38,9 @@ const Field = styled.input`
     border: 1px solid #B6B6B6;
     padding: 10px 15px;
     font-size: 15px;
+`
+
+const MessageError = styled.span`
+    font-size: 12px;
+    color: var(--primary-color);
 `

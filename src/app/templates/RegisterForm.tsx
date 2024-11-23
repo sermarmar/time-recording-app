@@ -1,12 +1,47 @@
 import styled from "@emotion/styled"
 import { Button } from "../components/Button"
 import { Input } from "../components/Input"
-import { FormEvent } from "react"
+import { ChangeEvent, FormEvent, useState } from "react"
+
+interface FormState {
+    name: string
+    surname: string
+    email: string
+    password: string
+    passwordRepeat: string
+}
 
 export const RegisterForm: React.FC = () => {
+    const [formData, setFormData] = useState<FormState>({
+        name: '',
+        surname: '',
+        email: '',
+        password: '',
+        passwordRepeat: ''
+    });
 
-    const handleRegister = (formData: FormEvent<HTMLFormElement>) => {
-        console.log(formData);
+    const handleChangeField = (event: ChangeEvent<HTMLInputElement>) => {
+        const {name, value} = event.target;
+        setFormData(prevData => ({...prevData, [name]: value}));
+    }
+
+    /*const handleValidation = (event: ChangeEvent<HTMLInputElement>) => {
+        const {name} = event.target;
+        if(name === 'passwordRepeat' && formData.password !== formData.passwordRepeat) {
+            setValidation(prevData => ({...prevData, [name]: false}));
+        } else {
+            setValidation(prevData => ({...prevData, [name]: true}));
+        }
+    }*/
+
+    const handleRegister = (formEvent: FormEvent<HTMLFormElement>) => {
+        formEvent.preventDefault();
+        /*if(formData.password !== formData.passwordRepeat) {
+            setValidation(prevData => (prevData.passwordRepeat.error = true));
+        } else {
+            setValidation(prevData => ({...prevData, 'passwordRepeat': true}));
+        }*/
+        //console.log(formData.currentTarget.);
     }
 
     return(
@@ -14,11 +49,11 @@ export const RegisterForm: React.FC = () => {
             <Form onSubmit={handleRegister} name="register">
                 <Title>Registrar</Title>
                 <FormBody>
-                    <Input name="name" type="text" text="Nombre: " placeholder="Escribe un nombre"/>
-                    <Input name="surname" type="text" text="Apellidos: " placeholder="Escribe apellidos"/>
-                    <Input name="email" type="email" text="Correo electrónico: " placeholder="Escribe tu correo electrónico"/>
-                    <Input name="password" type="password" text="Contraseña: " placeholder="Escribe una contraseña"/>
-                    <Input name="passwordRepeat" type="password" text="Repetir contraseña: " placeholder="Repite la contraseña"/>
+                    <Input name="name" type="text" text="Nombre: " value={ formData.name } placeholder="Escribe un nombre" onChange={ handleChangeField } />
+                    <Input name="surname" type="text" text="Apellidos: " value={ formData.surname } placeholder="Escribe apellidos" onChange={ handleChangeField } />
+                    <Input name="email" type="email" text="Correo electrónico: " value={ formData.email } placeholder="Escribe tu correo electrónico" onChange={ handleChangeField }/>
+                    <Input name="password" type="password" text="Contraseña: " value={ formData.password } placeholder="Escribe una contraseña" onChange={ handleChangeField }/>
+                    <Input name="passwordRepeat" type="password" text="Repetir contraseña: " value={ formData.passwordRepeat } placeholder="Repite la contraseña" onChange={ handleChangeField }/>
                     <Button type='submit'>Registrar</Button>
                 </FormBody>
             </Form>
