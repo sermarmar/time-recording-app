@@ -4,7 +4,7 @@ import { supabase } from "../config/supabase"
 export const UserApi = {
     
     save: async(user: User) => {
-        const { data, error } = await supabase
+        const { data: users, error } = await supabase
         .from('users')
         .insert([user])
         .select();
@@ -13,28 +13,39 @@ export const UserApi = {
         }
 
         const response: User = {
-            id: data[0].id,
-            name: data[0].name,
-            surname: data[0].surname,
-            email: data[0].email,
-            password: data[0].password
+            id: users[0].id,
+            name: users[0].name,
+            surname: users[0].surname,
+            email: users[0].email,
+            password: users[0].password
         }
 
         return response;
     },
     login: async(email: string, pass: string) => {
-        const { data, error } = await supabase
-        .auth.signUp({
-            email: email,
-            password: pass
-        });
+        const { data: users, error } = await supabase
+        .from('users')
+        .select("*")
+        .eq('email', email)
+        .eq('password', pass)
+        
         if(error !== null) {
             throw error;
-        } else if(data.user === null) {
+        } else if(users === null) {
             throw new Error;
         }
 
-        return data.user;
+        return map(users[0]);
     }
 
+}
+
+const map = (data) => {
+    return {
+        id: data.id,
+        name: data.name,
+        surname: data.surname,
+        email: data.email,
+        password: data.password
+    }
 }

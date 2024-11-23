@@ -2,6 +2,7 @@ import styled from "@emotion/styled"
 import { Button } from "../components/Button"
 import { Input } from "../components/Input"
 import { ChangeEvent, FormEvent, useState } from "react"
+import { LoginUseCase } from "../../core/useCases/LoginUseCase"
 
 interface FormState {
     email: string
@@ -19,24 +20,14 @@ export const LoginForm: React.FC = () => {
         setFormData(prevData => ({...prevData, [name]: value}));
     }
 
-    const handleRegister = (formEvent: FormEvent<HTMLFormElement>) => {
+    const handleLogin = (formEvent: FormEvent<HTMLFormElement>) => {
         formEvent.preventDefault();
-        /*SaveUserUseCase.save(formData).then(data => {
-            console.log(data);
-            alert('Se ha registrado correctamente');
-            setFormData({
-                email: '',
-                password: ''
-            });
-        }).catch(error => {
-            console.log(error);
-            alert('No se ha registrado correctamente. Vuelve a intentarlo');
-        });*/
+        LoginUseCase.login(formData.email, formData.password);
     }
 
     return(
         <>
-            <Form onSubmit={handleRegister} name="register">
+            <Form onSubmit={handleLogin} name="login">
                 <Title>Acceso</Title>
                 <FormBody>
                     <Input name="email" type="email" text="Correo electrónico: " value={ formData.email } placeholder="Escribe tu correo electrónico" onChange={ handleChangeField }/>
