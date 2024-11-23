@@ -3,6 +3,7 @@ import { Button } from "../components/Button"
 import { Input } from "../components/Input"
 import { ChangeEvent, FormEvent, useState } from "react"
 import { LoginUseCase } from "../../core/useCases/LoginUseCase"
+import { useAuthentication } from "../providers/authentication/useAuthentication"
 
 interface FormState {
     email: string
@@ -10,6 +11,7 @@ interface FormState {
 }
 
 export const LoginForm: React.FC = () => {
+    const { login } = useAuthentication;
     const [formData, setFormData] = useState<FormState>({
         email: '',
         password: ''
@@ -22,7 +24,7 @@ export const LoginForm: React.FC = () => {
 
     const handleLogin = (formEvent: FormEvent<HTMLFormElement>) => {
         formEvent.preventDefault();
-        LoginUseCase.login(formData.email, formData.password);
+        login(formData.email, formData.password);
     }
 
     return(
