@@ -24,6 +24,7 @@ export const AuthenticationProvider: React.FC<AuthenticationProviderProps> = ({ 
 
     const login = (email: string, pass: string) => {
         LoginUseCase.login(email, pass);
+        navigate('/timeEntries', {replace: true});
     }
 
     return (

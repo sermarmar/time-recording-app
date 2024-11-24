@@ -2,7 +2,6 @@ import styled from "@emotion/styled"
 import { Button } from "../components/Button"
 import { Input } from "../components/Input"
 import { ChangeEvent, FormEvent, useState } from "react"
-import { LoginUseCase } from "../../core/useCases/LoginUseCase"
 import { useAuthentication } from "../providers/authentication/useAuthentication"
 
 interface FormState {
@@ -11,7 +10,7 @@ interface FormState {
 }
 
 export const LoginForm: React.FC = () => {
-    const { login } = useAuthentication;
+    const { login } = useAuthentication();
     const [formData, setFormData] = useState<FormState>({
         email: '',
         password: ''
