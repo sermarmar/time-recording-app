@@ -23,17 +23,22 @@ export const AuthenticationProvider: React.FC<AuthenticationProviderProps> = ({ 
         });
     }
 
+    const logout = () => {
+        sessionStorage.removeItem('userSession');
+    }
+
     const getSession = () => {
         const sessionStr = sessionStorage.getItem('userSession');
         if(sessionStr !== null) {
             setSession(JSON.parse(sessionStr));
+            navigate('/timer');
         } else {
             navigate('/', { replace: true })
         }
     }
 
     return (
-        <AuthenticationContext.Provider value={{login , session }}>{ children }</AuthenticationContext.Provider>
+        <AuthenticationContext.Provider value={{login, logout, session }}>{ children }</AuthenticationContext.Provider>
     )
 
 }
