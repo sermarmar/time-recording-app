@@ -1,8 +1,8 @@
 import styled from "@emotion/styled"
-import { Button } from "../components/Button"
-import { Input } from "../components/Input"
 import { ChangeEvent, FormEvent, useState } from "react"
-import { useAuthentication } from "../providers/authentication/useAuthentication"
+import { useAuthentication } from "../../providers/authentication/useAuthentication"
+import { Input } from "../Input"
+import { Button } from "../Button"
 
 interface FormState {
     email: string

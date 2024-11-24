@@ -1,4 +1,4 @@
-import { RegisterForm } from "../templates/RegisterForm"
+import { RegisterForm } from "../components/templates/RegisterForm"
 
 export const RegisterPage: React.FC = () => {
 

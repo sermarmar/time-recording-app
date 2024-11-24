@@ -13,18 +13,23 @@ export const AuthenticationProvider: React.FC<AuthenticationProviderProps> = ({ 
     const [session, setSession] = useState<SessionDto>();
     
     useEffect(() => {
-        const sessionStr = sessionStorage.getItem('userSession');
-        if(sessionStr !== null) {
-            setSession(JSON.parse(sessionStr));
-            navigate('/timeEntries', {replace: true});
-        } else {
-            navigate('/', { replace: true })
-        }
+        getSession();
     }, []);
 
     const login = (email: string, pass: string) => {
-        LoginUseCase.login(email, pass);
-        navigate('/timeEntries', {replace: true});
+        LoginUseCase.login(email, pass).then(() => {
+            getSession();
+            navigate('/timer');
+        });
+    }
+
+    const getSession = () => {
+        const sessionStr = sessionStorage.getItem('userSession');
+        if(sessionStr !== null) {
+            setSession(JSON.parse(sessionStr));
+        } else {
+            navigate('/', { replace: true })
+        }
     }
 
     return (

@@ -1,8 +1,8 @@
 import styled from "@emotion/styled"
-import { Button } from "../components/Button"
-import { Input } from "../components/Input"
 import { ChangeEvent, FormEvent, useState } from "react"
-import { SaveUserUseCase } from "../../core/useCases/SaveUserUseCase"
+import { SaveUserUseCase } from "../../../core/useCases/SaveUserUseCase"
+import { Input } from "../Input"
+import { Button } from "../Button"
 
 interface FormState {
     name: string
@@ -60,19 +60,17 @@ export const RegisterForm: React.FC = () => {
     }
 
     return(
-        <>
-            <Form onSubmit={handleRegister} name="register">
-                <Title>Registrar</Title>
-                <FormBody>
-                    <Input name="name" type="text" text="Nombre: " value={ formData.name } placeholder="Escribe un nombre" onChange={ handleChangeField } />
-                    <Input name="surname" type="text" text="Apellidos: " value={ formData.surname } placeholder="Escribe apellidos" onChange={ handleChangeField } />
-                    <Input name="email" type="email" text="Correo electrónico: " value={ formData.email } placeholder="Escribe tu correo electrónico" onChange={ handleChangeField }/>
-                    <Input name="password" type="password" text="Contraseña: " value={ formData.password } placeholder="Escribe una contraseña" onChange={ handleChangeField }/>
-                    <Input name="passwordRepeat" type="password" text="Repetir contraseña: " value={ formData.passwordRepeat } placeholder="Repite la contraseña" onChange={ handleChangeField }/>
-                    <Button type='submit'>Registrar</Button>
-                </FormBody>
-            </Form>
-        </>
+        <Form onSubmit={handleRegister} name="register">
+            <Title>Registrar</Title>
+            <FormBody>
+                <Input name="name" type="text" text="Nombre: " value={ formData.name } placeholder="Escribe un nombre" onChange={ handleChangeField } />
+                <Input name="surname" type="text" text="Apellidos: " value={ formData.surname } placeholder="Escribe apellidos" onChange={ handleChangeField } />
+                <Input name="email" type="email" text="Correo electrónico: " value={ formData.email } placeholder="Escribe tu correo electrónico" onChange={ handleChangeField }/>
+                <Input name="password" type="password" text="Contraseña: " value={ formData.password } placeholder="Escribe una contraseña" onChange={ handleChangeField }/>
+                <Input name="passwordRepeat" type="password" text="Repetir contraseña: " value={ formData.passwordRepeat } placeholder="Repite la contraseña" onChange={ handleChangeField }/>
+                <Button type='submit'>Registrar</Button>
+            </FormBody>
+        </Form>
     )
 
 }
