@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import { ChangeEvent, FormEvent, useState } from "react"
-import { SaveUserUseCase } from "../../../core/useCases/SaveUserUseCase"
+import { SaveUserUseCase } from "../../../core/useCases/User/SaveUserUseCase"
 import { Input } from "../Input"
 import { Button } from "../Button"
 

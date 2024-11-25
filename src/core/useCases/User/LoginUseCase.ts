@@ -1,5 +1,5 @@
-import { UserApi } from "../../infraestructure/api/UserApi";
-import { Encryption } from "../../utils/Encryption";
+import { UserApi } from "../../../infraestructure/api/UserApi";
+import { Encryption } from "../../../utils/Encryption";
 
 export const LoginUseCase = {
     async login(email: string, pass: string) {

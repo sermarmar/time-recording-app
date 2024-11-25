@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { AuthenticationContext } from "./AuthenticationContext"
 import { SessionDto } from "../../../core/dtos/SessionDto";
-import { LoginUseCase } from "../../../core/useCases/LoginUseCase";
+import { LoginUseCase } from "../../../core/useCases/User/LoginUseCase";
 import { useNavigate } from "react-router-dom";
 
 interface AuthenticationProviderProps {
