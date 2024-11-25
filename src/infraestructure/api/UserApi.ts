@@ -40,7 +40,7 @@ export const UserApi = {
 
 }
 
-const map = (data) => {
+const map = (data): User => {
     return {
         id: data.id,
         name: data.name,
