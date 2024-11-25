@@ -1,9 +1,14 @@
 import styled from "@emotion/styled";
 import { useRef, useState } from "react";
 import { Button } from "../Button";
+import { SaveTimeEntryUseCase } from "../../../core/useCases/timeEntries/SaveTimeEntryUseCase";
+import { useAuthentication } from "../../providers/authentication/useAuthentication";
 
 export const Timer: React.FC = () => {
+    const { session } = useAuthentication();
+
     const [time, setTime] = useState(0); // Tiempo en milisegundos
+    const [startDate, setStartDate] = useState<Date>(new Date);
     const [isRunning, setIsRunning] = useState(false); // Controla si está activo
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -20,6 +25,7 @@ export const Timer: React.FC = () => {
             intervalRef.current = setInterval(() => {
                 setTime((prevTime) => prevTime + 1000);
             }, 1000);
+            setStartDate(new Date);
         }
     }
 
@@ -35,6 +41,15 @@ export const Timer: React.FC = () => {
             clearInterval(intervalRef.current);
         }
         setIsRunning(false);
+        if(session !== undefined) {
+            SaveTimeEntryUseCase.save({
+                startTime: startDate,
+                workDay: startDate,
+                endTime: new Date,
+                userId: session.id
+            })
+        }
+        
         setTime(0);
     };
     
@@ -47,7 +62,7 @@ export const Timer: React.FC = () => {
             <CardBody>
                 <Button onClick={ handleStart }>Iniciar</Button>
                 <Button onClick={ handlePause }>Pausar</Button>
-                <Button onClick={ handleFinish }>Finalizar</Button>
+                { isRunning ? (<Button onClick={ handleFinish }>Finalizar</Button>) : <></> }
             </CardBody>
         </Card>
     );

@@ -4,11 +4,10 @@ import { TimeEntry } from "../../model/TimeEntry";
 export const TimeEntryFactory = {
     create(model: TimeEntryDto): TimeEntry {
         return {
-            id: model.id,
-            workDay: model.workDay,
-            startTime: model.startTime,
-            endTime: model.endTime,
-            userId: model.userId
+            work_day: model.workDay,
+            start_time: model.startTime,
+            end_time: model.endTime,
+            user_id: model.userId
         }
     }
 }

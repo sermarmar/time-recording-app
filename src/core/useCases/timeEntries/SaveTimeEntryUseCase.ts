@@ -1,6 +1,6 @@
 import { TimeEntryApi } from "../../../infraestructure/api/TimeEntrieApi";
 import { TimeEntryDto } from "../../dtos/TimeEntryDto";
-import { TimeEntryFactory } from "../../factory/timeEntry/TimeEntryFactory copy";
+import { TimeEntryFactory } from "../../factory/timeEntry/TimeEntryFactory";
 import { TimeEntryDtoFactory } from "../../factory/timeEntry/TimeEntryDtoFactory";
 import { TimeEntry } from "../../model/TimeEntry";
 
