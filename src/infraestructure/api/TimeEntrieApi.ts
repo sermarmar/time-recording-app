@@ -10,16 +10,8 @@ export const TimeEntryApi = {
         .select()
         if(error !== null) {
             throw error;
-        }
-
-        const response: TimeEntry = {
-            id: time_entries[0].id,
-            workDay: time_entries[0].work_day,
-            startTime: time_entries[0].start_time,
-            endTime: time_entries[0].end_time,
-            userId: time_entries[0].user_id
-        }
-        return response;
+        } 
+        return time_entries[0];
     },
     getTimeEntries: async () => {
         const { data , error } = await supabase
@@ -29,6 +21,16 @@ export const TimeEntryApi = {
             throw error; 
         }
         return data;
-    }
+    },
+    getTimeEntriesById: async (id: number) => {
+        const { data , error } = await supabase
+        .from('time_entries')
+        .select()
+        .eq('user_id', id);
+        if(error !== null) {
+            throw error; 
+        }
+        return data;
+    },
 
 }
